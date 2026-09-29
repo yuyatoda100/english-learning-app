@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <!-- スマホ表示に対応させるためのビューポート設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中高生向け 英語学習アプリ</title>
-    <link rel="stylesheet" href="style.css">   
-        <!-- PWA用の設定 -->
-    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#4A90E2">
+    <title>中高生向け 英語学習アプリ</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PWA用の設定 -->
+    <link rel="manifest" href="manifest.json">
 
     <!-- iOS (iPhone/Safari) 用の特別設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,7 +17,7 @@
     <meta name="apple-mobile-web-app-title" content="英単語アプリ">
     <link rel="apple-touch-icon" href="icon-192.jpg">
 </head>
-    
+
 <body>
     <div id="app">
         <header>
@@ -28,6 +29,16 @@
             <p>アプリの準備中...</p>
         </main>
     </div>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch((error) => {
+            console.warn('Service worker registration failed:', error);
+          });
+        });
+      }
+    </script>
 
     <!-- JavaScriptの読み込み（bodyの最後で読み込むことでDOM描画後の操作を確実にします） -->
     <script src="app.js"></script>
